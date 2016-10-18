@@ -1,0 +1,29 @@
+[
+  {
+    "room": "ROOM1",
+    "section": 1,
+    "period": "1",
+    "abbr": "CSC630",
+    "instructor": "Johnson",
+    "meeting": "MTThextF",
+    "name": "Honors Computer Science Seminar"
+  },
+  {
+    "room": "ROOM2",
+    "section": 2,
+    "period": "2",
+    "abbr": "CSC630",
+    "instructor": "Jones",
+    "meeting": "MTThextF",
+    "name": "Honors Computer Science Seminar"
+  },
+  {
+    "room": "ROOM3",
+    "section": 3,
+    "period": "3",
+    "abbr": "CSC630",
+    "instructor": "Owl",
+    "meeting": "MTThextF",
+    "name": "Honors Computer Science Seminar"
+  }
+]

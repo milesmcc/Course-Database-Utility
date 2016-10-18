@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <title>{{site_name}}</title>
+  <style>
+  .contained {
+    padding-left: 4em;
+    padding-right: 4em;
+    padding-top: 2em;
+  }
+  .pull-right{
+    margin-right: 0px;
+    right: 0px;
+    text-align: right;
+    float: right;
+  }
+  h2, h1 {
+    display: inline;
+  }
+
+  hr {
+    background: #ddd;
+    clear: both;
+    float: none;
+    width: 100%;
+    height: 1px;
+    margin: 0 0 1.4em;
+    border: none;
+  }
+
+  .button-xlarge {
+    font-size: 150%;
+  }
+
+  #menu {
+    background-color: #dddddd;
+  }
+  footer {
+    position: inherit;
+    bottom:0;
+    width:100%;
+    height:3em;   /* Height of the footer */
+  }
+
+  table {
+    border-radius: 5px;
+  }
+  .new-search{
+    margin-right: 4em;
+    position: fixed;
+  }
+
+  .interface {
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-bottom: 2em;
+    padding-top: 2em;
+    background-color: white;
+    border-radius: 5px;
+    z-index: 9999;
+    margin: auto;
+    width: 50%;
+  }
+
+  .entry{
+    display: none;
+  }
+
+  .background-image {
+    background: url('https://upload.wikimedia.org/wikipedia/commons/c/c0/Phillips_Academy,_Andover,_MA_-_Samuel_Phillips_Hall.JPG') no-repeat center;
+    background-size:cover;
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
+    position: fixed;
+    width:100%;
+    height:100%;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .text {
+    letter-spacing: 0px;
+  }
+
+  .content {
+    z-index: 5;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+  }
+  </style>
+  <script>
+  function showForm(form){
+    $("#controller").hide();
+    $("#" + form).fadeIn();
+  }
+  function showController(){
+    $(".entry").hide();
+    $("#controller").fadeIn();
+  }
+  </script>
+</head>
+<body>
+  <div class="background-image" style="z-index: -1;"></div>
+  <div class="contained content" style="z-index: 9999;">
+    <div class="pure-g" id="controller">
+      <div class="interface">
+        <div class="interface">
+          <h1 style="letter-spacing: 0px;">{{site_name}}</h1>
+          <hr>
+          <button onclick="showForm('teacher-schedule')" style="width: 100%;" class="pure-button button-xlarge pure-button-primary">Teacher Schedule</button>
+          <br><br>
+          <button onclick="showForm('room-availability')" style="width: 100%;" class="pure-button button-xlarge pure-button-primary">Room Availability</button>
+          <br><br>
+          <button onclick="showForm('course-search')"style="width: 100%;" class="pure-button button-xlarge pure-button-primary">Course Search</button>
+          <br><br>
+          <button onclick="showForm('advanced-search')" style="width: 100%;" class="pure-button button-xlarge pure-button-primary">Advanced Search</button>
+          <br><br>
+          <button onclick="showForm('info')" style="width: 100%;" class="pure-button">Information</button>
+        </div>
+      </div>
+    </div>
+    <div class="pure-g">
+      <div id="advanced-search" class="interface entry">
+        <form class="pure-form pure-form-stacked" action="/search" method="POST">
+          <fieldset>
+            <legend><h3 class="text">Advanced Search</h3>
+              <i class="text"><small>Leave a field blank to allow for all values.</small></i>
+            </legend>
+            <br>
+            <div class="pure-g">
+              <div class="pure-u-1 ">
+                <label for="adv-abbr">Class Abbreviation</label>
+                <input name="abbr" id="adv-abbr" class="pure-u-23-24" placeholder="BIO100" type="text">
+              </div>
+
+              <div class="pure-u-1 ">
+                <label for="adv-name">Class Name</label>
+                <input name="name" id="adv-name" class="pure-u-23-24" placeholder="Visual Culture" type="text">
+              </div>
+
+              <div class="pure-u-1 ">
+                <label for="adv-instructor">Instructor</label>
+                <input name="teacher" id="adv-instructor" class="pure-u-23-24" placeholder="Jones" type="text">
+              </div>
+
+              <div class="pure-u-1 ">
+                <label for="adv-room">Room</label>
+                <input name="room" id="adv-room" class="pure-u-23-24" placeholder="SB10" type="text">
+              </div>
+
+              <div class="pure-u-1 ">
+                <label for="adv-period">Period</label>
+                <input name="period" id="adv-period" class="pure-u-23-24" placeholder="4" type="text">
+              </div>
+
+              <div class="pure-u-1 ">
+                <label for="adv-section">Section</label>
+                <input name="section" id="adv-section" class="pure-u-23-24" placeholder="15" type="text">
+              </div>
+
+              <div class="pure-u-1 ">
+                <label for="adv-section">Meeting Times</label>
+                <input name="meeting" id="adv-section" class="pure-u-23-24" placeholder="MTThextF" type="text">
+              </div>
+
+              <div class="pure-u-1 ">
+                <label for="advanced-term">Term</label>
+                <select name="term" id="advanced-term">
+                  {% for term in terms1 %}
+                    <option>{{term}}</option>
+                  {% end %}
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="pure-button pure-button-primary">Advanced Search</button>
+          </fieldset>
+        </form>
+        <button onclick="showController()" class="pure-button">Cancel</button>
+      </div>
+    </div>
+    <div class="pure-g">
+      <div id="teacher-schedule" class="interface entry">
+        <form class="pure-form pure-form-stacked" action="/search" method="POST">
+          <fieldset>
+            <legend><h3 class="text">Teacher Schedule</h3></legend>
+            <div class="pure-g">
+              <div class="pure-u-1 ">
+                <label for="adv-abbr">Teacher Name</label>
+                <input name="teacher" id="teacher-teacher" class="pure-u-23-24" placeholder="Jones" type="text">
+              </div>
+              <div class="pure-u-1 ">
+                <label for="teacher-term">Term</label>
+                <select name="term" id="teacher-term">
+                  {% for term in terms2 %}
+                    <option>{{term}}</option>
+                  {% end %}
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="pure-button pure-button-primary">Search</button>
+          </fieldset>
+        </form>
+        <button onclick="showController()" class="pure-button">Cancel</button>
+      </div>
+    </div>
+    <div class="pure-g">
+      <div id="room-availability" class="interface entry">
+        <form class="pure-form pure-form-stacked" action="/search" method="POST">
+          <fieldset>
+            <legend><h3 class="text">Room Availability</h3></legend>
+            <div class="pure-g">
+              <div class="pure-u-1 ">
+                <label for="room-room">Room Name</label>
+                <input name="room" id="room-room" class="pure-u-23-24" placeholder="SB10" type="text">
+              </div>
+              <div class="pure-u-1 ">
+                <label for="room-term">Term</label>
+                <select name="term" id="room-term">
+                  {% for term in terms3 %}
+                    <option>{{term}}</option>
+                  {% end %}
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="pure-button pure-button-primary">Search</button>
+          </fieldset>
+        </form>
+        <button onclick="showController()" class="pure-button">Cancel</button>
+      </div>
+    </div>
+    <div class="pure-g">
+      <div id="course-search" class="interface entry">
+        <form class="pure-form pure-form-stacked" action="/search" method="POST">
+          <fieldset>
+            <legend><h3 class="text">Course Search</h3></legend>
+            <div class="pure-g">
+              <div class="pure-u-1 ">
+                <label for="adv-abbr">Course Abbreviation</label>
+                <input name="abbr" id="course-abbr" class="pure-u-23-24" placeholder="CSC630" type="text">
+                <i class="text">and/or</i>
+              </div>
+              <div class="pure-u-1 ">
+                <label for="adv-abbr">Course Name</label>
+                <input name="name" id="course-name" class="pure-u-23-24" placeholder="An Introduction" type="text">
+              </div>
+              <div class="pure-u-1 ">
+                <label for="course-term">Term</label>
+                <select name="term" id="course-term">
+                  {% for term in terms4 %}
+                    <option>{{term}}</option>
+                  {% end %}
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="pure-button pure-button-primary">Search</button>
+          </fieldset>
+        </form>
+        <button onclick="showController()" class="pure-button">Cancel</button>
+      </div>
+    </div>
+    <div class="pure-g">
+      <div id="info" class="interface entry text">
+        <h1 class="text">Info</h1>
+        <hr>
+        <p>Created by <a href="http://md-c.com">Miles McCain</a> for <a href="http://andover.edu">Phillips Academy Andover</a>.</p>
+        <p>Made with HTML, CSS, JavaScript, Python, and JSON. Also uses <a href="http://purecss.io">PureCSS</a>, <a href="https://jquery.com/">jQuery</a>, and <a href="https://cdnjs.cloudflare.com/ajax/libs/sortable/0.8.0/js/sortable.min.js">sortable</a>.</p>
+        <p>This site is not officially assiociated with Phillips Academy Andover.</p>
+        <p>This is an open source project. View the source <a href="">here</a>.</p>
+        <hr>
+        <button onclick="showController()" class="pure-button">Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
