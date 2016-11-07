@@ -22,13 +22,13 @@ class Course:
     Used for interim storage of course data.
 
     Should have the following instance variables:
-    • abbreviation
-    • name
-    • teacher
-    • period
-    • room
-    • meeting
-    • section
+    abbreviation
+    name
+    teacher
+    period
+    room
+    meeting
+    section
     """
     def class_dictionary(self):
         return {
@@ -63,11 +63,11 @@ for line in source_file.readlines():
         current_course.abbreviation = parts[0].strip()
         current_course.name = parts[1].strip()
     if location is 1:
-        current_course.section = line
+        current_course.period = line
     if location is 2:
         current_course.teacher = line
     if location is 3:
-        current_course.period = line
+        current_course.section = line
     if location is 4:
         current_course.room = line
         current_course.meeting = "n/a"  # normally this would be index 4 and room would be 5 but meeting time isn't easily parsable from the winter master schedule
