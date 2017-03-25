@@ -1,5 +1,5 @@
 # Course Database Utility
-An internal utility for interaction with a database of courses &amp; other information that can be extracted from such a database
+An internal utility for interaction with a database of courses &amp; other information that can be extracted from such a database.
 
 ## What is this for
 This was created for Phillips Academy Andover. Each term, a master schedule PDF is released, but it's horrible to use. In order to search it, you need to use Cmd-F and hope that you entered in the right term. Want to search by period or by section exclusively? You're out of luck.
